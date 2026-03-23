@@ -1,0 +1,40 @@
+@use '../../../styles/variables' as v;
+
+
+.header{
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .header-home{
+    display: flex;
+    align-items: center;
+    .logo{
+      width: 200px;
+    }
+
+    .menu-btn{
+      height: fit-content;
+      background: none;
+      border: none;
+      cursor: pointer;
+      mat-icon{
+        height: 36px;
+        width: 36px;
+        font-size: 36px;
+        color: v.$orange;
+      }
+    }
+  }
+
+  .header-user{
+    display: flex;
+    mat-icon{
+      height: 36px;
+      width: 36px;
+      font-size: 36px;
+      color: v.$green700;
+    }
+  }
+}
