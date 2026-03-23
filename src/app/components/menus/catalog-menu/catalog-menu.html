@@ -1,11 +1,13 @@
-  @if (categories().length > 0) {
-    <nav>
-        <ul>
-          @for (category of categories(); track category.slug) {
-            <li>
-              {{category.name}}
-            </li>
-          }
-        </ul>
+
+  <div class="catalog-menu-wrapper" [class.open-menu]="uiService.isMenuOpen()">
+    <nav class="catalog-menu">
+      <ul>
+        @for (category of categories(); track category.slug) {
+          <li>
+            <a [routerLink]="['/catalog',category.slug]">{{category.name}}</a>
+          </li>
+        }
+      </ul>
     </nav>
-  }
+  </div>
+

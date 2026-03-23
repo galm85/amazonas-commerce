@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { MatIconModule } from '@angular/material/icon';
+import { UiService } from '../../services/ui-service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,10 @@ import { MatIconModule } from '@angular/material/icon';
 export class Header{
 
 
+private uiService = inject(UiService);
 
-
+toggleMenu(){
+  this.uiService.toggleMenu();
+}
 
 }

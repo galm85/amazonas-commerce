@@ -1,0 +1,45 @@
+@use '../../../../styles/variables' as v;
+
+
+.catalog-menu-wrapper{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  transition: width 0.2s ease;
+  overflow: hidden;
+  background-color: #fff;
+
+  .catalog-menu{
+    ul{
+      list-style-type: none;
+
+      li{
+        height: 35px;
+        line-height: 35px;
+        border-bottom: 1px solid v.$orange;
+        padding-inline: 20px;
+        cursor: pointer;
+
+        a{
+          text-decoration: none;
+          color: v.$green700;
+          text-transform: capitalize;
+        }
+        &:hover{
+          background-color: rgba($color: v.$orange, $alpha: 0.3);
+        }
+
+      }
+    }
+
+
+
+  }
+
+  &.open-menu{
+    width: 240px;
+  }
+}
+
+
