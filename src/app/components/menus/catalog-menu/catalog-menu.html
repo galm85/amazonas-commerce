@@ -4,7 +4,7 @@
       <ul>
         @for (category of categories(); track category.slug) {
           <li>
-            <a [routerLink]="['/catalog',category.slug]">{{category.name}}</a>
+            <a [routerLink]="['/catalog',category.slug]" (click)="uiService.closeMenu()">{{category.name}}</a>
           </li>
         }
       </ul>

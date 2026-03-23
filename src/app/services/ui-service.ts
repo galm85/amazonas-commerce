@@ -10,4 +10,8 @@ export class UiService {
   toggleMenu():void{
     this.isMenuOpen.update(value => !value);
   }
+
+  closeMenu():void{
+    this.isMenuOpen.set(false);
+  }
 }

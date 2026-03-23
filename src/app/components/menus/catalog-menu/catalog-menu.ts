@@ -13,7 +13,7 @@ import { RouterLink } from "@angular/router";
   styleUrl: './catalog-menu.scss',
 })
 export class CatalogMenu {
-    apiService = inject(ApiService);
+    protected apiService = inject(ApiService);
     uiService = inject(UiService);
 
     categories = toSignal(this.apiService.getCategories()
