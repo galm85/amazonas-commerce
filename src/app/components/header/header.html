@@ -8,6 +8,9 @@
     </a>
   </div>
   <div class="header-user">
-    <mat-icon>account_circle</mat-icon>
+    <button class="user-menu-btn" (click)="toggleUserMenu()">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <app-user-menu></app-user-menu>
   </div>
 </header>

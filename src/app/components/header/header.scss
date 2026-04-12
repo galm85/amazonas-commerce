@@ -30,6 +30,12 @@
 
   .header-user{
     display: flex;
+    position: relative;
+    .user-menu-btn{
+      background:none;
+      border: none;
+      cursor: pointer;
+    }
     mat-icon{
       height: 36px;
       width: 36px;

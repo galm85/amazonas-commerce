@@ -1,0 +1,31 @@
+.user-menu{
+  position: absolute;
+  z-index: 3;
+  top: 50px;
+  right: 0;
+  border-radius: 20px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease;
+
+  &.open-user-menu{
+    border: 1px solid gray;
+    padding: 20px 40px;
+    max-height: 100px;
+    width: 200px;
+
+  }
+
+  .no-user{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    a{
+      text-transform: uppercase;
+      font-size: 18px;
+      text-decoration: none;
+    }
+  }
+}

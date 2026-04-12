@@ -1,0 +1,15 @@
+<div class="user-menu" [class.open-user-menu]="uiService.isUserMenuOpen()">
+  @if (!user()) {
+  <div class="no-user">
+    <a routerLink="login">Login</a>
+    <a routerLink="signup">Sign Up</a>
+  </div>
+}
+@else {
+    <div class="user-logged">
+      <p>{{user()?.firstName}}</p>
+      <p>{{user()?.lastName}}</p>
+      <button class="logout" (click)="logout()">Logout</button>
+    </div>
+  }
+</div>

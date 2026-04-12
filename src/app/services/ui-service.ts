@@ -6,6 +6,7 @@ import { Injectable, signal } from '@angular/core';
 export class UiService {
 
   isMenuOpen = signal(false);
+  isUserMenuOpen = signal(false);
 
   toggleMenu():void{
     this.isMenuOpen.update(value => !value);
@@ -13,5 +14,13 @@ export class UiService {
 
   closeMenu():void{
     this.isMenuOpen.set(false);
+  }
+
+  toggleUserMenu():void{
+    this.isUserMenuOpen.update(value => !value);
+  }
+
+  closeUserMenu():void{
+    this.isUserMenuOpen.set(false);
   }
 }

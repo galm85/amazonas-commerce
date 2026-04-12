@@ -1,36 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ApiResponse, Category } from '../interfaces/api';
+import { ApiResponse, Category, User } from '../interfaces/api';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ApiService {
-
-  protected BASE_URL = 'http://localhost:4000/api/amazonas';
-  protected USE_MOCK_DATA = true;
-
-  private httpClient = inject(HttpClient);
-
-  getCategories():Observable<ApiResponse<Category[]>>{
-
-    if(this.USE_MOCK_DATA){
-      return of(this.demoCategoryList);
-    }else{
-      const url = `${this.BASE_URL}/catalog/category-list`;
-      return this.httpClient.get<ApiResponse<Category[]>>(url);
-    }
-
-
-  }
-
-
-
-
-
-
-  demoCategoryList = {
+ const demoCategoryList = {
     "success": true,
     "data": [
         {
@@ -155,6 +128,55 @@ export class ApiService {
         }
     ]
 }
+
+
+const demoUser:User = {
+    id:'558s232',
+    firstName:'Gal',
+    lastName:'Mizrahi',
+    phone:'054588585',
+    email:'gal@email.com'
+}
+@Injectable({
+  providedIn: 'root',
+})
+export class ApiService {
+
+  protected BASE_URL = 'http://localhost:4000/api/amazonas';
+  protected USE_MOCK_DATA = true;
+
+  private httpClient = inject(HttpClient);
+
+
+
+  protected user:WritableSignal<User | null> = signal(demoUser);
+
+
+  getCategories():Observable<ApiResponse<Category[]>>{
+
+    if(this.USE_MOCK_DATA){
+      return of(demoCategoryList);
+    }else{
+      const url = `${this.BASE_URL}/catalog/category-list`;
+      return this.httpClient.get<ApiResponse<Category[]>>(url);
+    }
+
+
+  }
+
+
+
+  getUser():Signal<User | null>{
+    return this.user;
+  }
+
+  logoutUser():void{
+    this.user.set(null);
+  }
+
+
+
+
 
 
 }
