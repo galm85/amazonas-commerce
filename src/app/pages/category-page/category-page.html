@@ -1,1 +1,23 @@
-<h1>{{currentCategory}}</h1>
+<div class="category-page">
+
+  <h1 class="category-title">{{category()}}</h1>
+
+
+
+  @if (products().length) {
+
+    <section class="products-wrapper">
+        @for (product of products(); track product.id) {
+          <div class="product-card">
+              @if (product.images.length) {
+                <img style="width: 200px;" [src]="product.images[0]" [alt]="product.title"/>
+              }
+              <h6>{{product.title}}</h6>
+              <h6>{{product.price}}</h6>
+          </div>
+        }
+    </section>
+  }@else {
+    <h2>No Product found</h2>
+  }
+</div>

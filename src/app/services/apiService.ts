@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ApiResponse, Category, User } from '../interfaces/api';
+import { ApiResponse, Category, Product, ProductsResonse, User } from '../interfaces/api';
 
  const demoCategoryList = {
     "success": true,
@@ -152,6 +152,7 @@ export class ApiService {
   protected user:WritableSignal<User | null> = signal(demoUser);
 
 
+  // catalog
   getCategories():Observable<ApiResponse<Category[]>>{
 
     if(this.USE_MOCK_DATA){
@@ -165,7 +166,14 @@ export class ApiService {
   }
 
 
+  getProductsByCategory(categoryId:string):Observable<ProductsResonse>{
+    const url = `${this.BASE_URL}/catalog/get-products-by-category/${categoryId}`;
+    return this.httpClient.get<ProductsResonse>(url);
+  }
 
+
+
+  // users
   getUser():Signal<User | null>{
     return this.user;
   }
