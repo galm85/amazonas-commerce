@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { ApiService } from '../../../services/apiService';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { Category } from '../../../interfaces/api';
 import { UiService } from '../../../services/ui-service';
 import { RouterLink } from "@angular/router";
+import { CatalogService } from '../../../services/catalog-service';
 
 @Component({
   selector: 'app-catalog-menu',
@@ -13,10 +13,10 @@ import { RouterLink } from "@angular/router";
   styleUrl: './catalog-menu.scss',
 })
 export class CatalogMenu {
-    protected apiService = inject(ApiService);
+    catalogService = inject(CatalogService);
     uiService = inject(UiService);
 
-    categories = toSignal(this.apiService.getCategories()
+    categories = toSignal(this.catalogService.getCategories()
       .pipe(
         map(res=>res.data ?? [])
         ),

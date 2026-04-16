@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { UiService } from '../../../services/ui-service';
 import { RouterLink } from "@angular/router";
-import { User } from '../../../interfaces/api';
-import { ApiService } from '../../../services/apiService';
+import { AuthService } from '../../../services/auth-service';
 
 @Component({
   selector: 'app-user-menu',
@@ -13,13 +12,13 @@ import { ApiService } from '../../../services/apiService';
 export class UserMenu {
 
   uiService = inject(UiService);
-  apiService = inject(ApiService);
+  authService = inject(AuthService);
 
-  user = this.apiService.getUser();
+  user = this.authService.getUser();
 
 
   logout():void{
-    this.apiService.logoutUser();
+    this.authService.logoutUser();
   }
 
 

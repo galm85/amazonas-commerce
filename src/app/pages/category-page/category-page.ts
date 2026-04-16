@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../../services/apiService';
 import { switchMap,map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Product } from '../../interfaces/api';
+import { CatalogService } from '../../services/catalog-service';
 
 @Component({
   selector: 'app-category-page',
@@ -14,7 +14,7 @@ import { Product } from '../../interfaces/api';
 export class CategoryPage {
 
   route = inject(ActivatedRoute);
-  apiService = inject(ApiService);
+  catalogService = inject(CatalogService);
 
   category = toSignal(this.route.paramMap.pipe(
     map(params => params.get('category'))
@@ -25,7 +25,7 @@ export class CategoryPage {
       map(param => param.get('category')),
       switchMap(category => {
         if(!category) return[];
-        return this.apiService.getProductsByCategory(category);
+        return this.catalogService.getProductsByCategory(category);
       }),
       map(res=>res?.data.products ?? [])
     ),
