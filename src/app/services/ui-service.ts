@@ -7,6 +7,7 @@ export class UiService {
 
   isMenuOpen = signal(false);
   isUserMenuOpen = signal(false);
+  isLoading =  signal(false);
 
   toggleMenu():void{
     this.isMenuOpen.update(value => !value);
@@ -22,5 +23,9 @@ export class UiService {
 
   closeUserMenu():void{
     this.isUserMenuOpen.set(false);
+  }
+
+  setLoading(value:boolean){
+    this.isLoading.set(value);
   }
 }

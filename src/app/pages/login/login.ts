@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth-service';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../../interfaces/api';
 import { finalize } from 'rxjs';
+import { UiService } from '../../services/ui-service';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +17,9 @@ export class Login {
   private fb = new FormBuilder();
   public authService = inject(AuthService);
   public router = inject(Router);
+  public uiService = inject(UiService);
 
   message = signal('');
-  loader = signal(false);
 
   loginForm = this.fb.group({
     email:['',[Validators.required]],
@@ -32,7 +33,7 @@ export class Login {
       return;
     }
 
-    this.loader.set(true);
+    this.uiService.setLoading(true);
 
     const formData:LoginRequest = {
       email:this.loginForm.value.email!,
@@ -41,7 +42,7 @@ export class Login {
 
     this.authService.loginUser(formData)
     .pipe(
-      finalize(()=>this.loader.set(false))
+      finalize(()=>this.uiService.setLoading(false))
     )
     .subscribe({
       next:(res)=>{

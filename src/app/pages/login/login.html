@@ -1,11 +1,5 @@
 <div class="login-page">
   <h1 class="page-title">Login</h1>
-
-  @if(loader()){
-    <div class="loader">
-      Loading...
-    </div>
-  }
   <div class="form-wrapper">
     <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()" >
 

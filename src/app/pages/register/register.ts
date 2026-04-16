@@ -4,6 +4,7 @@ import { Router, RouterLink } from "@angular/router";
 import { AuthService } from '../../services/auth-service';
 import { finalize } from 'rxjs';
 import { RegisterRequest } from '../../interfaces/api';
+import { UiService } from '../../services/ui-service';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class Register {
   private fb = new FormBuilder();
   public authService = inject(AuthService);
   public router = inject(Router);
+  public uiService =  inject(UiService);
 
 
   registrationForm = this.fb.group({
@@ -35,7 +37,6 @@ export class Register {
   });
 
   message = signal('');
-  loader = signal(false);
 
   private passwordMatchValidator(control:AbstractControl):ValidationErrors | null{
     const password = control.get('password')?.value;
@@ -50,7 +51,7 @@ export class Register {
       this.registrationForm.markAllAsTouched();
       return;
     }
-    this.loader.set(true)
+    this.uiService.setLoading(true);
 
     const form = this.registrationForm.value;
 
@@ -68,7 +69,8 @@ export class Register {
 
     this.authService.registerUser(formData)
     .pipe(
-      finalize(()=>this.loader.set(false))
+      finalize(()=>this.uiService.setLoading(false)
+    )
     )
     .subscribe({
       next:(res) => {
