@@ -1,0 +1,74 @@
+.registration-page{
+
+
+  .form-wrapper{
+    margin-top: 34px;
+    form{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+
+      .form-group{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 12px;
+        height: 80px;
+        &.small{
+          width: 47%;
+        }
+
+
+        label{
+          font-size: 14px;
+          padding-left: 7px;
+        }
+
+        input{
+          padding: 10px 15px;
+          outline: none;
+          border-radius: 10px;
+          border: 1px solid black;
+          &:focus{
+            border: 2px solid green;
+          }
+
+          &.ng-invalid.ng-touched{
+            color: red;
+            border: 1px solid red;
+            &::placeholder{
+              color: red;
+            }
+          }
+        }
+
+        .field-error{
+          font-size: 14px;
+          color: red;
+          padding-top: 5px;
+        }
+
+
+      }
+
+       .form-actions{
+          width: 100%;
+          text-align: center;
+          margin-top: 30px;
+          button{
+            padding: 10px 20px;
+            font-size: 24px;
+            margin: auto;
+          }
+        }
+
+    }
+
+    .login-wrapper{
+      font-size: 18px;
+      text-align: center;
+      margin-top: 30px;
+    }
+  }
+}

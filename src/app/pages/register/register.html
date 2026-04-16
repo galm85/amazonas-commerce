@@ -1,0 +1,105 @@
+<div class="registration-page">
+  <h1 class="page-title">Registration</h1>
+
+  <div class="form-wrapper">
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group small">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" formControlName="firstName" placeholder="FirstName">
+        @if (registrationForm.controls.firstName.touched && registrationForm.controls.firstName.invalid) {
+          <span class="field-error" >
+            First name is requierd (min 2 chars)
+          </span>
+        }
+      </div>
+
+      <div class="form-group small">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" formControlName="lastName" placeholder="Last Name">
+        @if (registrationForm.controls.lastName.touched && registrationForm.controls.lastName.invalid) {
+          <span class="field-error" >
+            Last name is requierd (min 2 chars)
+          </span>
+        }
+      </div>
+
+       <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" formControlName="email" placeholder="Email">
+        @if (registrationForm.controls.email.touched && registrationForm.controls.email.invalid) {
+          <span class="field-error" >
+            Valid email is required
+          </span>
+        }
+      </div>
+
+        <div class="form-group small">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" placeholder="Password">
+        @if (registrationForm.controls.password.touched && registrationForm.controls.password.invalid) {
+          <span class="field-error" >
+            Password must be at least 6 characters
+          </span>
+        }
+      </div>
+
+      <div class="form-group small">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm Password">
+        @if (registrationForm.errors?.['passwordMismatch'] && registrationForm.controls.confirmPassword.touched) {
+          <span class="field-error" >
+            Passwords do not match
+          </span>
+        }
+      </div>
+
+
+
+      <div class="form-group small">
+        <label for="phone">phone</label>
+        <input type="text" id="phone" formControlName="phone" placeholder="Phone">
+        @if (registrationForm.controls.phone.touched && registrationForm.controls.phone.invalid) {
+          <span class="field-error" >
+            Valid phone is required
+          </span>
+        }
+      </div>
+
+
+      <div class="form-group small">
+        <label for="street">Street</label>
+        <input type="text" id="street" formControlName="street" placeholder="Street">
+      </div>
+
+       <div class="form-group small">
+        <label for="city">city</label>
+        <input type="text" id="city" formControlName="city" placeholder="city">
+      </div>
+
+
+       <div class="form-group small">
+        <label for="country">country</label>
+        <input type="text" id="country" formControlName="country" placeholder="country">
+      </div>
+
+
+       <div class="form-group small">
+        <label for="zipcode">zipcode</label>
+        <input type="text" id="zipcode" formControlName="zipcode" placeholder="zipcode">
+      </div>
+
+
+      <div class="form-actions">
+        <button type="submit">Register</button>
+      </div>
+
+
+
+    </form>
+
+    <div class="login-wrapper">
+      <span>Already have an account? <a routerLink="/login">Login</a></span>
+    </div>
+  </div>
+</div>
