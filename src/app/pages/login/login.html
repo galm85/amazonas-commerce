@@ -1,0 +1,42 @@
+<div class="login-page">
+  <h1 class="page-title">Login</h1>
+
+  @if(loader()){
+    <div class="loader">
+      Loading...
+    </div>
+  }
+  <div class="form-wrapper">
+    <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()" >
+
+        <div class="form-group">
+          <input type="text" id="email" formControlName="email" placeholder="Email">
+          @if (loginForm.controls.email.touched && loginForm.controls.email.invalid) {
+            <span class="field-error">
+              Email is requierd
+            </span>
+          }
+        </div>
+
+        <div class="form-group">
+          <input type="password" id="password" formControlName="password" placeholder="Password">
+          @if (loginForm.controls.password.touched && loginForm.controls.password.invalid) {
+            <span class="field-error">
+              Password is requierd
+            </span>
+          }
+        </div>
+
+
+        <div class="form-actions">
+          <button type="submit">Login</button>
+        </div>
+
+
+    </form>
+
+    <div class="submit-message">
+      <p>{{message()}}</p>
+    </div>
+  </div>
+</div>

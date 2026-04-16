@@ -1,6 +1,6 @@
 import { Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { ApiService } from './apiService';
-import { RegisterResponse, User } from '../interfaces/api';
+import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, User } from '../interfaces/api';
 import { catchError, map, Observable, of } from 'rxjs';
 
 const demoUser:User = {
@@ -29,7 +29,11 @@ export class AuthService extends ApiService{
     this.user.set(null);
   }
 
-  registerUser(data:any):Observable<RegisterResponse>{
+  registerUser(data:RegisterRequest):Observable<RegisterResponse>{
     return this.httpClient.post<RegisterResponse>(`${this.BASE_URL}/auth/register`,data);
+  }
+
+  loginUser(data:LoginRequest):Observable<LoginResponse>{
+    return this.httpClient.post<LoginResponse>(`${this.BASE_URL}/auth/login`,data);
   }
 }

@@ -13,10 +13,35 @@ export interface ProductsResonse{
   }
 }
 
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  phone: string;
+  first_name: string;
+  last_name: string;
+  street?: string;
+  city?: string;
+  country?: string;
+  zipcode?: string;
+}
 
 export interface RegisterResponse{
   success:boolean;
   message:string;
+}
+
+
+export interface LoginRequest{
+  email:string;
+  password:string;
+}
+export interface LoginResponse{
+  success:boolean;
+  message?:string;
+  data?:{
+    token:string;
+    user:User;
+  }
 }
 
 export interface Category{
@@ -24,7 +49,6 @@ export interface Category{
   name:string;
   url:string;
 }
-
 
 export interface Product {
   id: number

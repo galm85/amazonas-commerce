@@ -1,8 +1,9 @@
-import { Component, inject, Signal, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule,FormBuilder,Validators,ValidationErrors,AbstractControl } from '@angular/forms';
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from '../../services/auth-service';
 import { finalize } from 'rxjs';
+import { RegisterRequest } from '../../interfaces/api';
 
 
 @Component({
@@ -53,7 +54,7 @@ export class Register {
 
     const form = this.registrationForm.value;
 
-    const formData = {
+    const formData:RegisterRequest = {
           email: form.email!,
           password: form.password!,
           phone: form.phone!,
@@ -75,7 +76,7 @@ export class Register {
           this.message.set(res.message);
           this.registrationForm.reset();
           setTimeout(()=>{
-            this.router.navigate(['/']);
+            this.router.navigate(['/login']);
           },2000);
         }else{
           this.message.set(res.message);
