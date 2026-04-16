@@ -1,6 +1,7 @@
 import { Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { ApiService } from './apiService';
-import { User } from '../interfaces/api';
+import { RegisterResponse, User } from '../interfaces/api';
+import { catchError, map, Observable, of } from 'rxjs';
 
 const demoUser:User = {
     id:'558s232',
@@ -16,7 +17,7 @@ const demoUser:User = {
 })
 export class AuthService extends ApiService{
 
-  private user:WritableSignal<User | null> = signal(demoUser);
+  private user:WritableSignal<User | null> = signal(null);
 
 
 
@@ -28,7 +29,7 @@ export class AuthService extends ApiService{
     this.user.set(null);
   }
 
-  registerUser():void{
-    this.user.set(demoUser);
+  registerUser(data:any):Observable<RegisterResponse>{
+    return this.httpClient.post<RegisterResponse>(`${this.BASE_URL}/auth/register`,data);
   }
 }

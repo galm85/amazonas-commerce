@@ -13,6 +13,12 @@ export interface ProductsResonse{
   }
 }
 
+
+export interface RegisterResponse{
+  success:boolean;
+  message:string;
+}
+
 export interface Category{
   slug:string;
   name:string;

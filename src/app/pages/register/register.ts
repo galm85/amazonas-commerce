@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, Signal, signal } from '@angular/core';
 import { ReactiveFormsModule,FormBuilder,Validators,ValidationErrors,AbstractControl } from '@angular/forms';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
+import { AuthService } from '../../services/auth-service';
+import { finalize } from 'rxjs';
 
 
 @Component({
@@ -12,6 +14,9 @@ import { RouterLink } from "@angular/router";
 export class Register {
 
   private fb = new FormBuilder();
+  public authService = inject(AuthService);
+  public router = inject(Router);
+
 
   registrationForm = this.fb.group({
     firstName:['',[Validators.required,Validators.minLength(2)]],
@@ -28,6 +33,8 @@ export class Register {
     validators:this.passwordMatchValidator.bind(this)
   });
 
+  message = signal('');
+  loader = signal(false);
 
   private passwordMatchValidator(control:AbstractControl):ValidationErrors | null{
     const password = control.get('password')?.value;
@@ -42,7 +49,47 @@ export class Register {
       this.registrationForm.markAllAsTouched();
       return;
     }
+    this.loader.set(true)
 
-    console.log(this.registrationForm.value);
+    const form = this.registrationForm.value;
+
+    const formData = {
+          email: form.email!,
+          password: form.password!,
+          phone: form.phone!,
+          first_name: form.firstName!,
+          last_name: form.lastName!,
+          street: form.street || undefined,
+          city: form.city || undefined,
+          country: form.country || undefined,
+          zipcode: form.zipcode || undefined,
+    }
+
+    this.authService.registerUser(formData)
+    .pipe(
+      finalize(()=>this.loader.set(false))
+    )
+    .subscribe({
+      next:(res) => {
+        if(res.success){
+          this.message.set(res.message);
+          this.registrationForm.reset();
+          setTimeout(()=>{
+            this.router.navigate(['/']);
+          },2000);
+        }else{
+          this.message.set(res.message);
+        }
+      },
+      error:(err)=>{
+        console.error('Registration faild',err);
+        if(err.error?.message){
+          this.message.set(err.error.message);
+        }else{
+          this.message.set('something went very wrong');
+        }
+      }
+    })
+
   }
 }
