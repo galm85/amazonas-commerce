@@ -1,0 +1,73 @@
+@use './variables' as v;
+
+
+.btn{
+  padding: 10px 15px;
+  font-size: 18px;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+  transition: all ease-in 0.2s;
+  background-color: v.$gray100;
+  color: v.$gray400;
+  &:hover{
+    background-color: v.$gray400;
+    color: v.$white;
+  }
+
+  &.btn-outline{
+    border-color:v.$gray400;
+    color: v.$gray400;
+    background: none;
+    &:hover{
+      background-color: v.$gray400;
+      color: v.$white;
+    }
+
+  }
+}
+
+
+
+.btn-blue{
+  border-color: v.$blue100;
+  background-color: v.$blue100;
+  color: v.$white;
+  &:hover{
+    background-color: v.$blue400;
+    color: v.$white;
+  }
+
+  &.btn-outline{
+    border-color: v.$blue400;
+    color: v.$blue400;
+    background: none;
+    &:hover{
+      background-color: v.$blue400;
+      color: v.$white;
+    }
+
+  }
+}
+
+
+.btn-red{
+  border-color: v.$red400;
+  background-color: v.$red300;
+  color: v.$white;
+  &:hover{
+    background-color: v.$red400;
+    color: v.$white;
+  }
+
+  &.btn-outline{
+    border-color: v.$red400;
+    color: v.$red400;
+    background: none;
+    &:hover{
+      background-color: v.$red400;
+    }
+
+  }
+}
